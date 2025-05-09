@@ -39,4 +39,109 @@
       height: 80px;
       background: pink;
       border-radius: 50% 50% 0 0;
+      transform-origin: bottom center;
+      animation: float 6s ease-in-out infinite;
+    }
 
+    .petal:nth-child(1) {
+      transform: rotate(0deg) translateY(-40px);
+      background: #ffc0cb;
+    }
+
+    .petal:nth-child(2) {
+      transform: rotate(72deg) translateY(-40px);
+      background: #ff69b4;
+    }
+
+    .petal:nth-child(3) {
+      transform: rotate(144deg) translateY(-40px);
+      background: #db7093;
+    }
+
+    .petal:nth-child(4) {
+      transform: rotate(216deg) translateY(-40px);
+      background: #ff1493;
+    }
+
+    .petal:nth-child(5) {
+      transform: rotate(288deg) translateY(-40px);
+      background: #ffb6c1;
+    }
+
+    .center {
+      position: absolute;
+      top: 35%;
+      left: 35%;
+      width: 30px;
+      height: 30px;
+      background: yellow;
+      border-radius: 50%;
+      z-index: 1;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    button {
+      background-color: #c71585;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 25px;
+      font-size: 1rem;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background-color: #a0136a;
+    }
+
+    .animation-petal {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: pink;
+      border-radius: 50%;
+      opacity: 0.8;
+      animation: fall 3s linear forwards;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(0) scale(1); opacity: 1; }
+      100% { transform: translateY(300px) scale(0.5); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Send Virtual Flowers 🌸</h1>
+    <div class="flower">
+      <div class="petal"></div>
+      <div class="petal"></div>
+      <div class="petal"></div>
+      <div class="petal"></div>
+      <div class="petal"></div>
+      <div class="center"></div>
+    </div>
+    <button onclick="sendFlower()">Give Flower</button>
+  </div>
+
+  <script>
+    function sendFlower() {
+      for (let i = 0; i < 10; i++) {
+        let petal = document.createElement('div');
+        petal.classList.add('animation-petal');
+        petal.style.left = (Math.random() * window.innerWidth) + 'px';
+        petal.style.top = '0px';
+        petal.style.background = ['#ffb6c1', '#ff69b4', '#ffc0cb'][Math.floor(Math.random() * 3)];
+        document.body.appendChild(petal);
+        setTimeout(() => petal.remove(), 3000);
+      }
+    }
+  </script>
+</body>
+</html>
